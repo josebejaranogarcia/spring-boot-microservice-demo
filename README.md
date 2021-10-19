@@ -1,2 +1,2 @@
-# spring-boot-microservice-demo
+# spring-boot-microservices-demo
 Microservices demo project with Spring Boot 
