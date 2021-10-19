@@ -1,4 +1,4 @@
-package bejarano.recipecatalogservice;
+package bejarano.recipecatalogservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +12,6 @@ import java.util.List;
 public class Recipe {
     private String name;
     private String description;
- //   private List <String> ingredients;
-    private int time;
     private int rating;
 
 }

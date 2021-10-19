@@ -1,10 +1,10 @@
-package bejarano.recipeinfoservice;
+package bejarano.recipedetailsservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RecipeInfoServiceApplicationTests {
+class RecipeDetailsServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
