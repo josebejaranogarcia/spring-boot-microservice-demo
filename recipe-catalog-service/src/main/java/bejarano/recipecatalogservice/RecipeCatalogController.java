@@ -2,10 +2,7 @@ package bejarano.recipecatalogservice;
 
 
 import bejarano.recipecatalogservice.model.Recipe;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,8 +11,8 @@ import java.util.List;
 @RequestMapping("/api/v1/catalog")
 public class RecipeCatalogController {
 
-    @GetMapping("/{userId}")
-    public List<Recipe> getRecipies(@PathVariable Long userId) {
+    @GetMapping
+    public List<Recipe> getRecipies(@RequestParam("id")  Long userId) {
 
         return Collections.singletonList(
                 new Recipe("Broiled Paprika",
