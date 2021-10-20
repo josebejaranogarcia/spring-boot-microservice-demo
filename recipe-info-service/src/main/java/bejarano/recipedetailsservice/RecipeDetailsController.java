@@ -1,6 +1,6 @@
 package bejarano.recipedetailsservice;
 
-import bejarano.recipedetailsservice.model.RecipeDetails;
+import bejarano.recipedetailsservice.models.RecipeDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

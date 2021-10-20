@@ -1,10 +1,8 @@
-package bejarano.recipecatalogservice.model;
+package bejarano.recipecatalogservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter

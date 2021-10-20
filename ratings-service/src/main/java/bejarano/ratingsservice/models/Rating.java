@@ -1,4 +1,4 @@
-package bejarano.ratingsservice.model;
+package bejarano.ratingsservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
