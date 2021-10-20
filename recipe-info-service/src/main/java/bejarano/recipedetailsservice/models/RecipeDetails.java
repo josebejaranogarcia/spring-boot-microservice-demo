@@ -1,4 +1,4 @@
-package bejarano.recipedetailsservice.model;
+package bejarano.recipedetailsservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
