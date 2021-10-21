@@ -19,6 +19,4 @@ public class RecipeDetails {
     private int time;
    // private List<String> directions;
 
-
-
 }

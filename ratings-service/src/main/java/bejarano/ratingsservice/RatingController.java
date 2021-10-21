@@ -15,8 +15,8 @@ import java.util.List;
 public class RatingController {
 
     List<Rating> ratingList= Arrays.asList(
-            new Rating(2, 4),
-            new Rating(3, 2)
+            new Rating(2, 4, 40),
+            new Rating(3, 2, 30)
     );
 
     @GetMapping
