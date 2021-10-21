@@ -13,9 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 public class RecipeDetails {
     private long recipeId;
+    private String name;
+    private String description;
     //   private List <String> ingredients;
     private int time;
-    private List<String> directions;
+   // private List<String> directions;
 
 
 
