@@ -1,9 +1,9 @@
 package bejarano.recipecatalogservice;
 
-
 import bejarano.recipecatalogservice.models.Rating;
 import bejarano.recipecatalogservice.models.Recipe;
 import bejarano.recipecatalogservice.models.RecipeDetails;
+import bejarano.recipecatalogservice.models.UserRatings;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,35 +23,24 @@ import java.util.stream.Collectors;
 public class RecipeCatalogController {
 
     private RestTemplate restTemplate;
-
-/*    @Autowired
-    private WebClient.Builder webClientBuilder;*/
+    private List<Rating>ratings;
+    private UserRatings userRatings;
 
     @Autowired
     public void setRestTemplate(RestTemplate template) {
         restTemplate = template;
     }
 
-    @GetMapping//http://localhost:7071/api/v1/catalog?id=3
+    @GetMapping
     public List<Recipe> getRecipies(@RequestParam("id") Long userId) {
 
-        Rating[] ratings = restTemplate.getForObject("http://localhost:7073/api/v1/rating?id=" +
-                userId, Rating[].class);
-        assert ratings != null;
-        //for(Rating r: ratings) log.info(String.valueOf(r.getRating()));
-        //List<Rating> ratingList = Arrays.asList(ratings);
+         userRatings = restTemplate.getForObject("http://localhost:7073/api/v1/rating?id=" +
+                userId, UserRatings.class);
+       getRatingsFromUserRatings();
 
-        return Arrays.asList(ratings).stream().map(rating -> {
+        return ratings.stream().map(rating -> {
             RecipeDetails recipeDetails = restTemplate.getForObject("http://localhost:7072/api/v1/details?id=" +
                     rating.getRecipeId(), RecipeDetails.class);
-
-               /* WebClient Aproach
-               RecipeDetails recipeDetails = webClientBuilder.build()
-                        .get()//Type of call
-                        .uri("http://localhost:7072/api/v1/details?id=" + rating.getRecipeId())
-                        .retrieve()// OK ahora fetch the data
-                        .bodyToMono(RecipeDetails.class) //La clase a la que me tiene que adaptar los datos, es lo mismo que el segundo arg en restTemplate
-                        .block();*/
 
             return new Recipe(recipeDetails.getName(),
                     "The great blend of spices on these broiled chicken breasts has a wonderful " +
@@ -59,8 +48,23 @@ public class RecipeCatalogController {
                     4);
         }).collect(Collectors.toList());
     }
+
+    private void getRatingsFromUserRatings() {
+        ratings = userRatings.getRaintings();
+        for(Rating r: ratings) log.info(String.valueOf(r.getRating()));
+    }
 }
 
+/*  WebClient Aproach
 
+    @Autowired
+    private WebClient.Builder webClientBuilder;*/
 
+      /*
+               RecipeDetails recipeDetails = webClientBuilder.build()
+                        .get()//Type of call
+                        .uri("http://localhost:7072/api/v1/details?id=" + rating.getRecipeId())
+                        .retrieve()// OK ahora fetch the data
+                        .bodyToMono(RecipeDetails.class) //La clase a la que me tiene que adaptar los datos, es lo mismo que el segundo arg en restTemplate
+                        .block();// Bloqueamos la ejecuci'on hasta que tengamos la lista, es decir, convertimos la comunicacion en sincrona*/
 
