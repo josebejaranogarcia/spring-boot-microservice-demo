@@ -49,6 +49,7 @@ public class RecipeCatalogController {
         }).collect(Collectors.toList());
     }
 
+    //Only to check ,delete later
     private void getRatingsFromUserRatings() {
         ratings = userRatings.getRaintings();
         for(Rating r: ratings) log.info(String.valueOf(r.getRating()));
