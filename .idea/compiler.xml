@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="recipe-catalog-service" />
+        <module name="ratings-service" />
+        <module name="recipe-info-service" />
+        <module name="eureka-discovery-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="eureka-discovery-server" target="11" />
+      <module name="ratings-service" target="1.8" />
+      <module name="recipe-catalog-service" target="1.8" />
+      <module name="recipe-info-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eureka-discovery-server" options="-parameters" />
+      <module name="ratings-service" options="-parameters" />
+      <module name="recipe-catalog-service" options="-parameters" />
+      <module name="recipe-info-service" options="-parameters" />
+    </option>
+  </component>
+</project>
