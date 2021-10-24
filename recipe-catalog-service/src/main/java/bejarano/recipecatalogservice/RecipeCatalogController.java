@@ -34,12 +34,12 @@ public class RecipeCatalogController {
     @GetMapping
     public List<Recipe> getRecipes(@RequestParam("id") int userId) {
 
-         userRatings = restTemplate.getForObject("http://localhost:7073/api/v1/rating?id=" +
+         userRatings = restTemplate.getForObject("http://ratings-service/api/v1/rating?id=" +
                 userId, UserRatings.class);
        getRatingsFromUserRatings();
 
         return ratings.stream().map(rating -> {
-            RecipeDetails recipeDetails = restTemplate.getForObject("http://localhost:7072/api/v1/details?id=" +
+            RecipeDetails recipeDetails = restTemplate.getForObject("http://recipe-details-service/api/v1/details?id=" +
                     rating.getRecipeId(), RecipeDetails.class);
 
             return new Recipe(recipeDetails.getTitle(),
