@@ -32,7 +32,7 @@ public class RecipeCatalogController {
     }
 
     @GetMapping
-    public List<Recipe> getRecipies(@RequestParam("id") Long userId) {
+    public List<Recipe> getRecipes(@RequestParam("id") int userId) {
 
          userRatings = restTemplate.getForObject("http://localhost:7073/api/v1/rating?id=" +
                 userId, UserRatings.class);
@@ -42,21 +42,20 @@ public class RecipeCatalogController {
             RecipeDetails recipeDetails = restTemplate.getForObject("http://localhost:7072/api/v1/details?id=" +
                     rating.getRecipeId(), RecipeDetails.class);
 
-            return new Recipe(recipeDetails.getName(),
-                    "The great blend of spices on these broiled chicken breasts has a wonderful " +
-                            "flavor and pairs well with many vegetable side dishes.",
+            return new Recipe(recipeDetails.getTitle(),
+                    recipeDetails.getSummary(),
                     4);
         }).collect(Collectors.toList());
     }
 
     //Only to check ,delete later
     private void getRatingsFromUserRatings() {
-        ratings = userRatings.getRaintings();
+        ratings = userRatings.getRatings();
         for(Rating r: ratings) log.info(String.valueOf(r.getRating()));
     }
 }
 
-/*  WebClient Aproach
+/*  WebClient Approach
 
     @Autowired
     private WebClient.Builder webClientBuilder;*/

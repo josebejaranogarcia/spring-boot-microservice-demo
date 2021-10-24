@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Rating {
-   private long recipeId;
+   private int recipeId;
    private int rating;
 }

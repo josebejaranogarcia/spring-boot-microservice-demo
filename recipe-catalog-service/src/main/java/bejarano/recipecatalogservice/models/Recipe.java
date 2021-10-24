@@ -8,8 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Recipe {
-    private String name;
-    private String description;
+    private String title;
+    private String summary;
     private int rating;
-
 }

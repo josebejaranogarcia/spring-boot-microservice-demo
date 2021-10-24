@@ -20,8 +20,8 @@ public class RecipeDetailsController {
         directions.add ("Rinse chicken breasts");
     }
 
-    @GetMapping//http://localhost:7072/api/v1/details?id=2
-    public RecipeDetails getDetails(@RequestParam ("id") Long recipeId){
-        return new RecipeDetails(recipeId, "Test Name", "Ummmmmm", 30);
+    @GetMapping
+    public RecipeDetails getDetails(@RequestParam ("id") int recipeId){
+        return new RecipeDetails(recipeId, "Test Name", "Ummmmmm");
     }
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Rating {
 
-   private long recipeId;
+   private int recipeId;
    private int rating;
    private int time;
 }

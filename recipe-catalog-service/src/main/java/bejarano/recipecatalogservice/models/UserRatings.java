@@ -14,6 +14,6 @@ import java.util.List;
 public class UserRatings {
 
     private long userId;
-    private List<Rating> raintings;
+    private List<Rating> ratings;
 
 }

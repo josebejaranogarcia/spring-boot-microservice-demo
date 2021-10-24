@@ -29,7 +29,7 @@ public class RatingController {
     @GetMapping
     public UserRatings getRating(@RequestParam("id") long userId) {
         userRatings.setUserId(userId);
-        userRatings.setRaintings(ratingList);
+        userRatings.setRatings(ratingList);
         return userRatings;
     }
 }

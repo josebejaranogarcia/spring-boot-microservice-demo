@@ -10,10 +10,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 public class RecipeDetails {
-    private long recipeId;
-    private String name;
-    private String description;
-    //   private List <String> ingredients;
-    private int time;
-  //  private List<String> directions;
+    private int id;
+    private String title;
+    private String summary;
 }
