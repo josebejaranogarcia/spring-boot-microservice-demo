@@ -6,14 +6,13 @@ import bejarano.recipecatalogservice.models.RecipeDetails;
 import bejarano.recipecatalogservice.models.UserRatings;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,22 +24,29 @@ public class RecipeCatalogController {
     private RestTemplate restTemplate;
     private List<Rating>ratings;
     private UserRatings userRatings;
+    @Value("${rating-service}")
+    private String urlRating;
+    @Value("${details-service}")
+    private String urlDetails;
 
     @Autowired
     public void setRestTemplate(RestTemplate template) {
         restTemplate = template;
     }
 
+
     @GetMapping
     public List<Recipe> getRecipes(@RequestParam("id") int userId) {
 
-         userRatings = restTemplate.getForObject("http://ratings-service/api/v1/rating?id=" +
+         userRatings = restTemplate.getForObject(urlRating+"?id=" +
                 userId, UserRatings.class);
-       getRatingsFromUserRatings();
+
+       checkRatingsFromUserRatings();
 
         return ratings.stream().map(rating -> {
-            RecipeDetails recipeDetails = restTemplate.getForObject("http://recipe-details-service/api/v1/details?id=" +
+            RecipeDetails recipeDetails = restTemplate.getForObject(urlDetails+"?id=" +
                     rating.getRecipeId(), RecipeDetails.class);
+            assert recipeDetails != null;
 
             return new Recipe(recipeDetails.getTitle(),
                     recipeDetails.getSummary(),
@@ -49,7 +55,7 @@ public class RecipeCatalogController {
     }
 
     //Only to check ,delete later
-    private void getRatingsFromUserRatings() {
+    private void checkRatingsFromUserRatings() {
         ratings = userRatings.getRatings();
         for(Rating r: ratings) log.info(String.valueOf(r.getRating()));
     }
