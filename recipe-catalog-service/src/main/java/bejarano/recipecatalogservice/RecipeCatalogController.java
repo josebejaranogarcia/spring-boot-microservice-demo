@@ -23,10 +23,9 @@ public class RecipeCatalogController {
 
     private RestTemplate restTemplate;
     private List<Rating>ratings;
-    private UserRatings userRatings;
-    @Value("${rating-service}")
+    @Value("${rating-service-url}")
     private String urlRating;
-    @Value("${details-service}")
+    @Value("${details-service-url}")
     private String urlDetails;
 
     @Autowired
@@ -38,8 +37,9 @@ public class RecipeCatalogController {
     @GetMapping
     public List<Recipe> getRecipes(@RequestParam("id") int userId) {
 
-         userRatings = restTemplate.getForObject(urlRating+"?id=" +
+        UserRatings userRatings = restTemplate.getForObject(urlRating + "?id=" +
                 userId, UserRatings.class);
+        assert userRatings != null;
         ratings = userRatings.getRatings();
 
        checkRatingsFromUserRatings();
