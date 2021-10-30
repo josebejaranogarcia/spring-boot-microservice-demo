@@ -5,7 +5,6 @@ import bejarano.recipecatalogservice.models.Recipe;
 import bejarano.recipecatalogservice.models.RecipeDetails;
 import bejarano.recipecatalogservice.models.UserRatings;
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,18 +20,18 @@ import java.util.stream.Collectors;
 @Log
 public class RecipeCatalogController {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     private List<Rating>ratings;
     @Value("${rating-service-url}")
     private String urlRating;
     @Value("${details-service-url}")
     private String urlDetails;
 
-    @Autowired
-    public void setRestTemplate(RestTemplate template) {
+    public RecipeCatalogController(RestTemplate template) {
         restTemplate = template;
     }
 
+    
 
     @GetMapping
     public List<Recipe> getRecipes(@RequestParam("id") int userId) {

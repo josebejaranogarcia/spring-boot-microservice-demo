@@ -1,7 +1,6 @@
 package bejarano.recipedetailsservice;
 
 import bejarano.recipedetailsservice.models.RecipeDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,21 +12,23 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/api/v1/details")
 public class RecipeDetailsController {
 
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     @Value("${api-key}")
     private String apiKey;
     @Value("${api-url}")
     private String apiUrl;
 
+    public RecipeDetailsController(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
 
     @GetMapping
     public RecipeDetails getDetails(@RequestParam("id") int recipeId) {
 
-        RecipeDetails recipeDetails= restTemplate.getForObject(apiUrl + apiKey
-                + "&includeNutrition=false", RecipeDetails.class);
-        return recipeDetails;
+        return restTemplate.getForObject(
+  apiUrl + recipeId + "/summary/?apiKey="+ apiKey  + "&includeNutrition=false",
+                RecipeDetails.class);
 
     }
 }

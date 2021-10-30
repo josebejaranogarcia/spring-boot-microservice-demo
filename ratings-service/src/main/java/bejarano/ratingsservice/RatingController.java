@@ -23,7 +23,7 @@ public class RatingController {
 
     List<Rating> ratingList = Arrays.asList(
             new Rating(4632, 4, 40),
-            new Rating(3, 2, 30)
+            new Rating(716429, 2, 30)
     );
 
     @GetMapping
