@@ -40,6 +40,7 @@ public class RecipeCatalogController {
 
          userRatings = restTemplate.getForObject(urlRating+"?id=" +
                 userId, UserRatings.class);
+        ratings = userRatings.getRatings();
 
        checkRatingsFromUserRatings();
 
@@ -50,13 +51,12 @@ public class RecipeCatalogController {
 
             return new Recipe(recipeDetails.getTitle(),
                     recipeDetails.getSummary(),
-                    4);
+                    rating.getRating());
         }).collect(Collectors.toList());
     }
 
     //Only to check ,delete later
     private void checkRatingsFromUserRatings() {
-        ratings = userRatings.getRatings();
         for(Rating r: ratings) log.info(String.valueOf(r.getRating()));
     }
 }
