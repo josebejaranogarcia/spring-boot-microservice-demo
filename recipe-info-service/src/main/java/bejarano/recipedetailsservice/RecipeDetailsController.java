@@ -25,7 +25,6 @@ public class RecipeDetailsController {
 
     @GetMapping
     public RecipeDetails getDetails(@RequestParam("id") int recipeId) {
-        System.out.println("Hello branch");
         return restTemplate.getForObject(
   apiUrl + recipeId + "/summary/?apiKey="+ apiKey  + "&includeNutrition=false",
                 RecipeDetails.class);
