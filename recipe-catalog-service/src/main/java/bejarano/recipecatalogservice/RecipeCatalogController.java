@@ -31,8 +31,6 @@ public class RecipeCatalogController {
         restTemplate = template;
     }
 
-    
-
     @GetMapping
     public List<Recipe> getRecipes(@RequestParam("id") int userId) {
 
